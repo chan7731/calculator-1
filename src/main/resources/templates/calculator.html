@@ -5,37 +5,108 @@
     <title>계산하는 계산기</title>
     <style>
         @font-face {
-    font-family: 'Ownglyph_ryurue-Rg';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2405-2@1.0/Ownglyph_ryurue-Rg.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-}
+            font-family: 'Ownglyph_ryurue-Rg';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2405-2@1.0/Ownglyph_ryurue-Rg.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
 
         body {
-            font-family: 'Ownglyph_ryurue-Rg';
-            background-color: #C4E0E5
+            font-family: 'Ownglyph_ryurue-Rg', sans-serif;
+            background: linear-gradient(to right, #C4E0E5, #4CA1AF);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: white;
+            padding: 30px 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 2rem;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin: 15px 0 5px;
+            font-size: 1.1rem;
+            text-align: left;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+
+        button {
+            background-color: #4CA1AF;
+            color: white;
+            font-size: 1.1rem;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #357f89;
+        }
+
+        .result, .error {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .result {
+            background-color: #e0f8e9;
+            color: #2c6e49;
+        }
+
+        .error {
+            background-color: #fbe3e4;
+            color: #b00020;
         }
     </style>
 </head>
 <body>
+<div class="container">
     <h1>계산하는 계산기</h1>
     <form th:action="@{/calculate}" method="post">
-    <label for="num1">Number 1:</label>
-    <input type="number" step="any" name="num1" id="num1" required />
+        <label for="num1">Number 1:</label>
+        <input type="number" step="any" name="num1" id="num1" required />
 
-    <label for="num2">Number 2:</label>
-    <input type="number" step="any" name="num2" id="num2" required />
+        <label for="num2">Number 2:</label>
+        <input type="number" step="any" name="num2" id="num2" required />
 
-    <label for="operation">Operation:</label>
-    <select name="operation" id="operation">
-        <option value="add">Add (+)</option>
-        <option value="subtract">Subtract (-)</option>
-        <option value="multiply">Multiply (×)</option>
-        <option value="divide">Divide (÷)</option>
-    </select>
+        <label for="operation">Operation:</label>
+        <select name="operation" id="operation">
+            <option value="add">Add (+)</option>
+            <option value="subtract">Subtract (-)</option>
+            <option value="multiply">Multiply (×)</option>
+            <option value="divide">Divide (÷)</option>
+        </select>
 
-    <button type="submit">Calculate</button>
+        <button type="submit">Calculate</button>
     </form>
+
     <div th:if="${errorMessage}" class="error">
         <p th:text="${errorMessage}"></p>
     </div>
@@ -43,5 +114,6 @@
     <div th:if="${result}" class="result">
         <h2>Result: <span th:text="${result}"></span></h2>
     </div>
+</div>
 </body>
 </html>
