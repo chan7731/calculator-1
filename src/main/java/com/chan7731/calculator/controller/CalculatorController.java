@@ -18,7 +18,7 @@ public class CalculatorController {
         this.calculatorService = calculatorService;
     }
 
-    @PostMapping("/calculator")
+    @PostMapping("/calculate")
     public String calculate(
         @RequestParam("num1") double num1,
         @RequestParam("num2") double num2,
@@ -26,6 +26,9 @@ public class CalculatorController {
     Model model) {
         try {
             double result = calculatorService.calculate(num1, num2, operation);
+
+            System.out.println(result);
+
             model.addAttribute("result", result);
         } catch (IllegalArgumentException e) {
             model.addAttribute("errorMessage", e.getMessage());
